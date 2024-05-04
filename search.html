@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your style.css file -->
+</head>
+<body>
+    <header> <!-- Header section starts here -->
+        <nav class="navbar">
+            <div class="logo">News.</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search news here" class="search-bar" id="search-input">
+                <button id="search-button">Search</button>
+            </div>
+        </nav>
+    </header> <!-- Header section ends here -->
+    <section class="obj-width" id="blog-container" >
+      <!-- <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div>
+      <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div>
+      <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div>
+      <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div>
+      <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div>
+      <div class="blog-card">
+          <img src="https://placehold.co/600x400" alt="">
+          <h2>This is a title</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima vero alias veritatis expedita necessitatibus qui molestias illum eius ipsa.</p>
+      </div> -->
+  </section>
+
+    <!-- Your HTML content for displaying search results -->
+    <div id="search-results-container"></div>
+    
+    <script>
+        // Retrieve search query from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query');
+        
+        // Function to perform search and display results
+        async function performSearch() {
+            try {
+                // Clear existing search results
+                const searchResultsContainer = document.getElementById('search-results-container');
+                searchResultsContainer.innerHTML = '';
+    
+                // Perform API call to fetch search results
+                const apiKey = '87ab7e5213f94c5d9b1334d9515c0b6a';
+                const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pageSize=20&apiKey=${apiKey}`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const articles = data.articles.filter(article => article.urlToImage !== null).slice(0, 10); // Filter articles with images
+    
+                // Populate search results container with new search results
+                articles.forEach(article => {
+                    // Create a blog card for each article
+                    const blogCard = document.createElement('div');
+                    blogCard.classList.add('blog-card');
+    
+                    // Create elements for blog card content
+                    const img = document.createElement('img');
+                    img.src = article.urlToImage;
+                    img.alt = article.title;
+                    const title = document.createElement('h2');
+                    title.textContent = article.title.length > 30 ? article.title.slice(0, 30) + "..." : article.title;
+                    const description = document.createElement('p');
+                    description.textContent = article.description.length > 120 ? article.description.slice(0, 120) + "..." : article.description;
+    
+                    // Append elements to blog card
+                    blogCard.appendChild(img);
+                    blogCard.appendChild(title);
+                    blogCard.appendChild(description);
+    
+                    // Add click event listener to open article in new tab
+                    blogCard.addEventListener('click', () => {
+                        window.open(article.url, "_blank");
+                    });
+    
+                    // Append blog card to search results container
+                    searchResultsContainer.appendChild(blogCard);
+                });
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                const searchResultsContainer = document.getElementById('search-results-container');
+                searchResultsContainer.innerHTML = '<p>Error fetching search results. Please try again later.</p>';
+            }
+        }
+    
+        // Execute search when the page loads
+        window.onload = () => {
+            if (query) {
+                performSearch();
+            }
+        };
+    </script>
+    
+  
+</body>
+</html>

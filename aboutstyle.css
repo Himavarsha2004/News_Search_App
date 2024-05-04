@@ -1,0 +1,114 @@
+/* aboutstyle.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('images/news.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center 30%; 
+}
+
+/* Header Styles */
+header {
+    background-color: #231f1f;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.logo {
+    color: #fff;
+    font-size: 27px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+
+
+.menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+#search-button {
+    padding: 8px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+/* About Styles */
+.about {
+    text-align: center;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.about-content h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+
+/* Footer Styles */
+footer {
+    background-color: #231f1f;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
